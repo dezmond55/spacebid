@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>SpaceBid - Dashboard</title>
+    <!-- Favicon fallback to silence 404 -->
+    <link rel="icon" href="data:,">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -59,8 +61,8 @@
         <h2>SpaceBid Dashboard</h2>
         <nav>
             <a href="index.html">Home</a>
-            <a href="#list">List a Project</a>
-            <a href="#suppliers">For Suppliers</a>
+            <a href="index.html#list">List a Project</a> <!-- Fixed link -->
+            <a href="index.html#suppliers">For Suppliers</a> <!-- Fixed link -->
             <a href="#" id="logout">Logout</a>
         </nav>
     </header>
@@ -80,8 +82,9 @@
         <p>© 2025 SpaceBid. All rights reserved.</p>
     </footer>
 
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <!-- Firebase v9 Compatibility Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
     <script>
         const firebaseConfig = {
             apiKey: "AIzaSyBKU5yiEjgbKO7Wy_K2dGj7GhM_SoAl2po",
