@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>SpaceBid - Free Space Project Procurement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        .hero {
+            background: url('https://via.placeholder.com/1200x400?text=Space+Image') no-repeat center;
+            background-size: cover;
+            padding: 50px;
+            text-align: center;
+            color: rgb(10, 9, 9);
+        }
+        .hero h1 {
+            font-size: 2.5em;
+        }
+        .section {
+            padding: 20px;
+            max-width: 800px;
+            margin: 10px auto;
+            background-color: white;
+            border-radius: 5px;
+        }
+        .cta {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        #list form, #login form {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        #list label, #login label {
+            font-size: 0.9em;
+            margin-bottom: 2px;
+        }
+        #list input, #list textarea, #login input {
+            padding: 6px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 0.9em;
+        }
+        #list textarea {
+            height: 60px;
+            resize: vertical;
+        }
+        footer {
+            background-color: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            width: 100%;
+            margin-top: 20px;
+        }
+        #login .toggle {
+            cursor: pointer;
+            color: #007bff;
+            text-decoration: underline;
+        }
+        #list, #suppliers, #logout {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>SpaceBid</h2>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#" id="list-link">List a Project</a>
+            <a href="#" id="suppliers-link">For Suppliers</a>
+            <a href="#privacy">Privacy</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+            <a href="#login">Login</a>
+            <a href="#" id="logout">Logout</a>
+        </nav>
+    </header>
+
+    <div class="hero" id="home">
+        <h1>Securely List Your Space Project for Free</h1>
+        <p>Connect with trusted component manufacturers—your data stays confidential.</p>
+        <a href="#" id="get-started" class="cta">Get Started</a>
+    </div>
+
+    <div class="section" id="login">
+        <h2 id="login-title">Login</h2>
+        <p id="login-message">Log in to access your projects or supplier dashboard.</p>
+        <form id="auth-form">
+            <label>Email:</label>
+            <input type="email" id="email" required placeholder="e.g., you@company.com">
+            <label>Password:</label>
+            <input type="password" id="password" required placeholder="Enter password">
+            <input type="submit" value="Login" class="cta" id="submit-btn">
+            <p>Not registered? <span class="toggle">Sign Up</span></p> <!-- Removed onclick -->
+        </form>
+    </div>
+
+    <div class="section" id="privacy">
+        <h2>Privacy & Confidentiality</h2>
+        <p>Your data is secure with SpaceBid. We use HTTPS encryption, share details only with verified suppliers after manual vetting, and commit to non-disclosure. <strong>Request an NDA anytime—email <a href="mailto:support@spacebid.space">support@spacebid.space</a>.</strong></p>
+    </div>
+
+    <div class="section" id="about">
+        <h2>About SpaceBid</h2>
+        <p>SpaceBid connects space builders with manufacturers securely to support the $1 trillion space economy.</p>
+    </div>
+
+    <div class="section" id="contact">
+        <h2>Contact Us</h2>
+        <p>Email: <a href="mailto:support@spacebid.space">support@spacebid.space</a></p>
+    </div>
+
+    <div class="section" id="list">
+        <h2>List Your Project</h2>
+        <p>Submit your space project sections securely. We’ll manually verify your submission and connect you with trusted suppliers.</p>
+        <form action="mailto:support@spacebid.space" method="post" enctype="text/plain">
+            <label>Company Name:</label>
+            <input type="text" name="company" required placeholder="e.g., SpaceX">
+            <label>Project Name:</label>
+            <input type="text" name="project" required placeholder="e.g., Starlink">
+            <label>Section (e.g., Propulsion):</label>
+            <input type="text" name="section" required placeholder="e.g., Thruster">
+            <label>Details (basic specs only—avoid sensitive data):</label>
+            <textarea name="details" required placeholder="e.g., 10 kg thruster, 500W"></textarea>
+            <label>Email:</label>
+            <input type="email" name="email" required placeholder="e.g., you@company.com">
+            <input type="submit" value="Submit Project" class="cta">
+        </form>
+    </div>
+
+    <div class="section" id="suppliers">
+        <h2>For Suppliers</h2>
+        <p>Browse free project listings and express interest in supplying components. We’ll verify your credentials and share vetted projects.</p>
+        <a href="mailto:support@spacebid.space?subject=Supplier Interest" class="cta">Join as a Supplier</a>
+    </div>
+
+    <footer>
+        <p>© 2025 SpaceBid. All rights reserved.</p>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script>
+        // Firebase config
+        const firebaseConfig = {
+            apiKey: "AIzaSyBKU5yiEjgbKO7Wy_K2dGj7GhM_SoAl2po",
+            authDomain: "spacebid-32f99.firebaseapp.com",
+            projectId: "spacebid-32f99",
+            storageBucket: "spacebid-32f99.firebasestorage.app",
+            messagingSenderId: "210214583211",
+            appId: "1:210214583211:web:70ae2ddbf5b8b1c96f70ee",
+            measurementId: "G-L25FXHN0ZC"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        // Define isLogin at the top
+        let isLogin = true;
+
+        // Toggle function
+        function toggleAuth() {
+            isLogin = !isLogin;
+            console.log("Toggle to:", isLogin); // Debug toggle state
+            document.getElementById("login-title").textContent = isLogin ? "Login" : "Sign Up";
+            document.getElementById("submit-btn").value = isLogin ? "Login" : "Sign Up";
+            document.querySelector(".toggle").textContent = isLogin ? "Sign Up" : "Login";
+            document.getElementById("login-message").textContent = isLogin 
+                ? "Log in to access your projects or supplier dashboard." 
+                : "Sign up to start listing projects or supplying components.";
+        }
+
+        // Add toggle event listener
+        document.querySelector(".toggle").addEventListener("click", toggleAuth);
+
+        // Form submission
+        document.getElementById("auth-form").addEventListener("submit", (e) => {
+            e.preventDefault();
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            console.log("Form submitted, isLogin:", isLogin);
+
+            if (isLogin) {
+                auth.signInWithEmailAndPassword(email, password)
+                    .then((userCredential) => {
+                        console.log("Login success:", userCredential.user.email);
+                        alert("Logged in successfully as " + userCredential.user.email + "!");
+                        window.location.href = "dashboard.html";
+                    })
+                    .catch((error) => {
+                        console.error("Login error:", error.message);
+                        alert("Error: " + error.message);
+                    });
+            } else {
+                auth.createUserWithEmailAndPassword(email, password)
+                    .then((userCredential) => {
+                        console.log("Signup success:", userCredential.user.email);
+                        alert("Signed up successfully! Please log in.");
+                        toggleAuth();
+                    })
+                    .catch((error) => {
+                        console.error("Signup error:", error.message);
+                        alert("Error: " + error.message);
+                    });
+            }
+        });
+
+        // Auth state listener
+        auth.onAuthStateChanged((user) => {
+            const listSection = document.getElementById("list");
+            const suppliersSection = document.getElementById("suppliers");
+            const logoutLink = document.getElementById("logout");
+            listSection.style.display = user ? "block" : "none";
+            suppliersSection.style.display = user ? "block" : "none";
+            logoutLink.style.display = user ? "inline" : "none";
+        });
+
+        // Logout
+        document.getElementById("logout").addEventListener("click", (e) => {
+            e.preventDefault();
+            auth.signOut()
+                .then(() => {
+                    alert("Logged out successfully!");
+                    window.location.href = "index.html";
+                })
+                .catch((error) => alert("Error: " + error.message));
+        });
+
+        // Restricted link handler
+        function handleRestrictedClick(event, sectionId) {
+            event.preventDefault();
+            auth.onAuthStateChanged((user) => {
+                if (user) {
+                    window.location.href = "dashboard.html";
+                } else {
+                    alert("Please sign up or log in to access " + sectionId + "!");
+                    document.getElementById("login").scrollIntoView();
+                }
+            });
+        }
+
+        document.getElementById("get-started").addEventListener("click", (e) => handleRestrictedClick(e, "this feature"));
+        document.getElementById("list-link").addEventListener("click", (e) => handleRestrictedClick(e, "List Your Project"));
+        document.getElementById("suppliers-link").addEventListener("click", (e) => handleRestrictedClick(e, "For Suppliers"));
+    </script>
+</body>
+</html>
