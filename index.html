@@ -80,13 +80,16 @@
             display: inline-block;
             font-size: 1.2em;
             transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            cursor: pointer;
         }
         .cta:hover {
             background-color: #0056b3;
             transform: translateY(-2px);
         }
         #list form,
-        #login form {
+        #login form,
+        #suppliers form {
             display: flex;
             flex-direction: column;
             gap: 12px;
@@ -94,14 +97,17 @@
             margin: 0 auto;
         }
         #list label,
-        #login label {
+        #login label,
+        #suppliers label {
             font-size: 1em;
             margin-bottom: 5px;
             color: #555;
         }
         #list input,
         #list textarea,
-        #login input {
+        #login input,
+        #suppliers input,
+        #suppliers textarea {
             padding: 10px;
             width: calc(100% - 20px);
             box-sizing: border-box;
@@ -112,12 +118,15 @@
         }
         #list input:focus,
         #list textarea:focus,
-        #login input:focus {
+        #login input:focus,
+        #suppliers input:focus,
+        #suppliers textarea:focus {
             outline: none;
             border-color: #007bff;
             box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
         }
-        #list textarea {
+        #list textarea,
+        #suppliers textarea {
             height: 100px;
             resize: vertical;
         }
@@ -153,7 +162,7 @@
             nav a { font-size: 1em; }
             .section { padding: 30px 15px; }
             .cta { font-size: 1em; padding: 12px 25px; }
-            #list input, #list textarea, #login input { font-size: 0.9em; padding: 8px; }
+            #list input, #list textarea, #login input, #suppliers input, #suppliers textarea { font-size: 0.9em; padding: 8px; }
         }
         @media (max-width: 480px) {
             .hero h1 { font-size: 2em; }
@@ -170,7 +179,7 @@
             <a href="#home">Home</a>
             <a href="#" id="list-link">List a Project</a>
             <a href="#" id="suppliers-link">For Suppliers</a>
-            <a href="#privacy.html">Privacy</a>
+            <a href="privacy.html">Privacy</a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
             <a href="#login">Login</a>
@@ -225,8 +234,20 @@
     </div>
     <div class="section" id="suppliers">
         <h2>For Suppliers</h2>
-        <p>Browse free project listings and express interest in supplying components. We’ll verify your credentials and share vetted projects.</p>
-        <a href="mailto:support@spacebid.space?subject=Supplier Interest" class="cta">Join as a Supplier</a>
+        <p>Browse free project listings and express interest in supplying components. Submit your company details below to join as a supplier—we’ll verify your credentials and share vetted projects.</p>
+        <form action="mailto:support@spacebid.space" method="post" enctype="text/plain">
+            <label>Company Name:</label>
+            <input type="text" name="supplier_company" required placeholder="e.g., OrbitalTech">
+            <label>Services Offered (e.g., Components):</label>
+            <input type="text" name="services" required placeholder="e.g., Thrusters, Avionics">
+            <label>Regions Served:</label>
+            <input type="text" name="regions" required placeholder="e.g., North America, Europe">
+            <label>Company Details (basic info only—avoid sensitive data):</label>
+            <textarea name="details" required placeholder="e.g., 50 employees, 10 years in aerospace"></textarea>
+            <label>Contact Email:</label>
+            <input type="email" name="email" required placeholder="e.g., you@company.com">
+            <input type="submit" value="Join as a Supplier" class="cta">
+        </form>
     </div>
     <footer>
         <p>© 2025 SpaceBid. All rights reserved.</p>
