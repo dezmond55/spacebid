@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>SpaceBid - Dashboard</title>
-    <!-- Favicon fallback to silence 404 -->
     <link rel="icon" href="data:,">
     <style>
         body {
@@ -15,44 +14,76 @@
             background-color: #f4f4f4;
             color: #333;
             line-height: 1.6;
+            scroll-behavior: smooth;
         }
         header {
             background-color: #1a1a1a;
             color: white;
             padding: 20px;
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
         }
         nav a {
             color: white;
-            margin: 0 15px;
+            margin: 0;
             text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #007bff;
         }
         .section {
-            padding: 20px;
-            max-width: 800px;
-            margin: 10px auto;
+            padding: 40px 20px;
+            max-width: 90%;
+            margin: 20px auto;
             background-color: white;
-            border-radius: 5px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .cta {
             background-color: #007bff;
             color: white;
-            padding: 10px 20px;
+            padding: 15px 30px;
             text-decoration: none;
             border-radius: 5px;
             display: inline-block;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .cta:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
         }
         footer {
             background-color: #1a1a1a;
             color: white;
             text-align: center;
-            padding: 10px;
+            padding: 20px;
             position: relative;
             width: 100%;
-            margin-top: 20px;
+            margin-top: 40px;
         }
         #logout {
-            display: none; /* Hidden until logged in */
+            display: none;
+        }
+        @media (max-width: 768px) {
+            nav a { font-size: 1em; }
+            .section { padding: 30px 15px; }
+            .cta { font-size: 1em; padding: 12px 25px; }
+        }
+        @media (max-width: 480px) {
+            nav a { font-size: 0.9em; }
+            .cta { font-size: 0.9em; padding: 10px 20px; }
         }
     </style>
 </head>
@@ -61,12 +92,11 @@
         <h2>SpaceBid Dashboard</h2>
         <nav>
             <a href="index.html">Home</a>
-            <a href="index.html#list">List a Project</a> <!-- Fixed link -->
-            <a href="index.html#suppliers">For Suppliers</a> <!-- Fixed link -->
+            <a href="index.html#list">List a Project</a>
+            <a href="index.html#suppliers">For Suppliers</a>
             <a href="#" id="logout">Logout</a>
         </nav>
     </header>
-
     <div class="section" id="dashboard">
         <h2>Welcome to Your Dashboard</h2>
         <p id="welcome-message">Hello, <span id="user-email"></span>! You’re logged in.</p>
@@ -77,12 +107,10 @@
         </ul>
         <p>More features coming soon!</p>
     </div>
-
     <footer>
         <p>© 2025 SpaceBid. All rights reserved.</p>
     </footer>
 
-    <!-- Firebase v9 Compatibility Scripts -->
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
     <script>
@@ -104,7 +132,7 @@
                 document.getElementById("user-email").textContent = user.email;
                 document.getElementById("logout").style.display = "inline";
             } else {
-                window.location.href = "index.html"; // Redirect to index if not logged in
+                window.location.href = "index.html";
             }
         });
 
