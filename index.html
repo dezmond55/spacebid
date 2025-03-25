@@ -7,7 +7,6 @@
     <title>SpaceBid - Your Secure Platform for Space Project Procurement</title>
     <link rel="icon" href="data:,">
     <style>
-        /* Same as previous index.html */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -26,19 +25,17 @@
             z-index: 100;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
+            text-align: center;
         }
-        .header-title { margin: 0; }
-        .nav-container {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-        }
+        .header-title { margin: 0; font-size: 1.8em; }
+        .nav-container { margin-top: 10px; }
         nav {
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
+            justify-content: center;
         }
         nav a {
             color: white;
@@ -57,6 +54,8 @@
             font-size: 1em;
             transition: background-color 0.3s ease;
             display: none;
+            min-width: 80px;
+            margin-top: 10px;
         }
         #logout-btn:hover { background-color: #0056b3; }
         .hero {
@@ -163,14 +162,14 @@
             .cta { font-size: 1em; padding: 12px 25px; }
             #list input, #list textarea, #login input, #suppliers input, #suppliers textarea { font-size: 0.9em; padding: 8px; }
             .footer-container { flex-direction: column; }
-            header { flex-direction: column; gap: 10px; }
-            .nav-container { width: 100%; }
+            .header-title { font-size: 1.5em; }
         }
         @media (max-width: 480px) {
             .hero h1 { font-size: 2em; }
             .hero p { font-size: 1em; max-width: 100%; }
             nav a { font-size: 0.9em; }
             .cta { font-size: 0.9em; padding: 10px 20px; }
+            .header-title { font-size: 1.3em; }
         }
     </style>
 </head>
@@ -189,7 +188,7 @@
                 <a href="privacy.html">Privacy</a>
                 <a href="#about">About</a>
                 <a href="#contact">Contact</a>
-                <a href="#login">Login</a>
+                <a href="#login" id="login-link">Login</a>
             </nav>
         </div>
         <button id="logout-btn">Logout</button>
@@ -360,6 +359,7 @@
             const aboutSection = document.getElementById("about");
             const contactSection = document.getElementById("contact");
             const logoutBtn = document.getElementById("logout-btn");
+            const loginLink = document.getElementById("login-link");
             if (user) {
                 listSection.style.display = "block";
                 suppliersSection.style.display = "block";
@@ -368,6 +368,7 @@
                 aboutSection.style.display = "none";
                 contactSection.style.display = "none";
                 logoutBtn.style.display = "inline-block";
+                loginLink.style.display = "none"; // Hide Login in nav when logged in
             } else {
                 listSection.style.display = "none";
                 suppliersSection.style.display = "none";
@@ -376,6 +377,7 @@
                 aboutSection.style.display = "block";
                 contactSection.style.display = "block";
                 logoutBtn.style.display = "none";
+                loginLink.style.display = "inline";
             }
         });
 
