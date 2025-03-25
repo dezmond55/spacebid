@@ -133,11 +133,50 @@
         footer {
             background-color: #1a1a1a;
             color: white;
-            text-align: center;
-            padding: 20px;
-            position: relative;
+            padding: 40px 20px;
+            text-align: left;
             width: 100%;
             margin-top: 40px;
+        }
+        .footer-container {
+            max-width: 90%;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+        }
+        .footer-section h3 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        .footer-section p, .footer-section li {
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            color: #ccc;
+        }
+        .footer-section a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer-section a:hover {
+            color: #0056b3;
+        }
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #ccc;
         }
         #login .toggle {
             cursor: pointer;
@@ -163,6 +202,7 @@
             .section { padding: 30px 15px; }
             .cta { font-size: 1em; padding: 12px 25px; }
             #list input, #list textarea, #login input, #suppliers input, #suppliers textarea { font-size: 0.9em; padding: 8px; }
+            .footer-container { flex-direction: column; }
         }
         @media (max-width: 480px) {
             .hero h1 { font-size: 2em; }
@@ -250,7 +290,48 @@
         </form>
     </div>
     <footer>
-        <p>© 2025 SpaceBid. All rights reserved.</p>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>System Status</h3>
+                <p>All systems online</p>
+                <p>No maintenance planned</p>
+            </div>
+            <div class="footer-section">
+                <h3>Updates</h3>
+                <p>We will list recent updates here as projects and suppliers join SpaceBid.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Popular Searches</h3>
+                <p>Search functionality coming soon. Future popular searches will appear here.</p>
+                <ul>
+                    <li><a href="#">[Placeholder Search 1]</a></li>
+                    <li><a href="#">[Placeholder Search 2]</a></li>
+                    <li><a href="#">[Placeholder Search 3]</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Recent Projects</h3>
+                <p>We will list recent space projects here as they are submitted to SpaceBid.</p>
+                <ul>
+                    <li>[Placeholder Project 1]</li>
+                    <li>[Placeholder Project 2]</li>
+                    <li>[Placeholder Project 3]</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Insights</h3>
+                <ul>
+                    <li><a href="#">How to Win Space Project Contracts</a></li>
+                    <li><a href="#">Navigating Global Space Tendering</a></li>
+                    <li><a href="#">What Does a Space Project Manager Do?</a></li>
+                    <li><a href="#">Additive Manufacturing in Space</a></li>
+                    <li><a href="#">View More Insights</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 SpaceBid. All rights reserved.</p>
+        </div>
     </footer>
 
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
