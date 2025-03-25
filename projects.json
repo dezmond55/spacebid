@@ -1,16 +1,1 @@
-[
-    {
-        "name": "Starlink Batch 15",
-        "type": "Satellite",
-        "stage": "Manufacturing",
-        "location": "USA",
-        "details": "Next batch of Starlink satellites requiring thrusters and solar panels."
-    },
-    {
-        "name": "Lunar Gateway Module",
-        "type": "Spacecraft",
-        "stage": "Design",
-        "location": "Europe",
-        "details": "Habitation module for lunar orbit, seeking avionics suppliers."
-    }
-]
+[]

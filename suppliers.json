@@ -1,14 +1,1 @@
-[
-    {
-        "name": "OrbitalTech",
-        "services": "Thrusters, Avionics",
-        "region": "North America",
-        "details": "10 years in aerospace, 50 employees."
-    },
-    {
-        "name": "AstroWorks",
-        "services": "Avionics",
-        "region": "Europe",
-        "details": "Specializes in satellite electronics, 20 years experience."
-    }
-]
+[]
