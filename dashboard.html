@@ -67,6 +67,46 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+        .cta {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .cta:hover { background-color: #0056b3; transform: translateY(-2px); }
+        #list form, #suppliers form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        #list label, #suppliers label {
+            font-size: 1em;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        #list input, #list textarea, #suppliers input, #suppliers textarea {
+            padding: 10px;
+            width: calc(100% - 20px);
+            box-sizing: border-box;
+            font-size: 1em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+        #list input:focus, #list textarea:focus, #suppliers input:focus, #suppliers textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+        }
+        #list textarea, #suppliers textarea { height: 100px; resize: vertical; }
         footer {
             background-color: #1a1a1a;
             color: white;
@@ -93,6 +133,8 @@
         @media (max-width: 768px) {
             nav a { font-size: 1em; }
             .section { padding: 30px 15px; }
+            .cta { font-size: 1em; padding: 12px 25px; }
+            #list input, #list textarea, #suppliers input, #suppliers textarea { font-size: 0.9em; padding: 8px; }
             .footer-container { flex-direction: column; }
             header { flex-direction: column; gap: 10px; }
             .nav-container { width: 100%; }
@@ -100,6 +142,7 @@
         }
         @media (max-width: 480px) {
             nav a { font-size: 0.9em; }
+            .cta { font-size: 0.9em; padding: 10px 20px; }
         }
     </style>
 </head>
@@ -126,6 +169,40 @@
     <div class="section">
         <h1>Welcome to Your Dashboard</h1>
         <p>Hello, <span id="user-email">[User Email]</span>! Manage your space projects and supplier interactions here.</p>
+    </div>
+    <div class="section" id="list">
+        <h2>List Your Project</h2>
+        <p>Submit your space project sections securely. We’ll verify your submission and connect you with trusted manufacturers.</p>
+        <form action="mailto:support@spacebid.space" method="post" enctype="text/plain">
+            <label>Company Name:</label>
+            <input type="text" name="company" required placeholder="e.g., SpaceX">
+            <label>Project Name:</label>
+            <input type="text" name="project" required placeholder="e.g., Starlink">
+            <label>Section (e.g., Propulsion):</label>
+            <input type="text" name="section" required placeholder="e.g., Thruster">
+            <label>Details (basic specs only—avoid sensitive data):</label>
+            <textarea name="details" required placeholder="e.g., 10 kg thruster, 500W"></textarea>
+            <label>Email:</label>
+            <input type="email" name="email" required placeholder="e.g., you@company.com">
+            <input type="submit" value="Submit Project" class="cta">
+        </form>
+    </div>
+    <div class="section" id="suppliers">
+        <h2>For Suppliers</h2>
+        <p>Connect with trusted space component manufacturers. Submit your details to join our directory—we’ll verify your credentials and share vetted projects.</p>
+        <form action="mailto:support@spacebid.space" method="post" enctype="text/plain">
+            <label>Company Name:</label>
+            <input type="text" name="supplier_company" required placeholder="e.g., OrbitalTech">
+            <label>Services Offered (e.g., Components):</label>
+            <input type="text" name="services" required placeholder="e.g., Thrusters, Avionics">
+            <label>Regions Served:</label>
+            <input type="text" name="regions" required placeholder="e.g., North America, Europe">
+            <label>Company Details (basic info only—avoid sensitive data):</label>
+            <textarea name="details" required placeholder="e.g., 50 employees, 10 years in aerospace"></textarea>
+            <label>Contact Email:</label>
+            <input type="email" name="email" required placeholder="e.g., you@company.com">
+            <input type="submit" value="Join as a Supplier" class="cta">
+        </form>
     </div>
     <footer>
         <div class="footer-container">
@@ -193,12 +270,12 @@
             const logoutBtn = document.getElementById("logout-btn");
             if (user) {
                 document.getElementById("user-email").textContent = user.email;
-                loginLink.style.display = "none"; // Hide Login when logged in
+                loginLink.style.display = "none";
                 logoutBtn.style.display = "inline-block";
             } else {
-                loginLink.style.display = "inline"; // Show Login when logged out
+                loginLink.style.display = "inline";
                 logoutBtn.style.display = "none";
-                window.location.href = "index.html"; // Redirect if not logged in
+                window.location.href = "index.html";
             }
         });
 
@@ -223,7 +300,7 @@
                 if (user) {
                     if (sectionId === "Browse Projects") window.location.href = "browse_projects.html";
                     else if (sectionId === "Browse Suppliers") window.location.href = "browse_suppliers.html";
-                    else window.location.href = "dashboard.html";
+                    else window.location.href = "dashboard.html"; // Stay on dashboard for List/Suppliers
                 } else {
                     alert("Please sign up or log in to access " + sectionId + "!");
                     window.location.href = "index.html#login";
