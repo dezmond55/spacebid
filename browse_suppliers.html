@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpaceBid - Browse Suppliers</title>
+    <link rel="icon" href="data:,">
+    <style>
+        /* Reuse styles from browse_projects.html */
+        .supplier-card { /* Same as project-card */ }
+    </style>
+</head>
+<body>
+    <header>
+        <h2 class="header-title">SpaceBid</h2>
+        <div class="nav-container">
+            <nav>
+                <a href="index.html#home">Home</a>
+                <a href="browse_projects.html">Browse Projects</a>
+                <a href="browse_suppliers.html">Browse Suppliers</a>
+                <a href="index.html#list">List a Project</a>
+                <a href="index.html#suppliers">For Suppliers</a>
+                <a href="blog.html">Blog</a>
+                <a href="faq.html">FAQ</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="index.html#about">About</a>
+                <a href="index.html#contact">Contact</a>
+                <a href="index.html#login">Login</a>
+            </nav>
+        </div>
+        <button id="logout-btn">Logout</button>
+    </header>
+    <div class="section">
+        <h1>Browse Suppliers</h1>
+        <p>Connect with trusted space component manufacturers in our comprehensive directory.</p>
+        <div class="filter-section">
+            <input type="text" id="search" placeholder="Search suppliers...">
+            <select id="services">
+                <option value="">All Services</option>
+                <option value="Thrusters">Thrusters</option>
+                <option value="Avionics">Avionics</option>
+            </select>
+            <select id="region">
+                <option value="">All Regions</option>
+                <option value="North America">North America</option>
+                <option value="Europe">Europe</option>
+            </select>
+        </div>
+        <div class="project-list" id="supplier-list"></div>
+    </div>
+    <!-- Footer same as index.html -->
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script>
+        const firebaseConfig = { /* Copy from index.html */ };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        auth.onAuthStateChanged((user) => {
+            if (!user) window.location.href = "index.html";
+            document.getElementById("logout-btn").style.display = user ? "inline-block" : "none";
+        });
+
+        document.getElementById("logout-btn").addEventListener("click", (e) => {
+            e.preventDefault();
+            auth.signOut().then(() => {
+                alert("Logged out successfully!");
+                window.location.href = "index.html";
+            });
+        });
+
+        fetch("suppliers.json")
+            .then(response => response.json())
+            .then(suppliers => {
+                const supplierList = document.getElementById("supplier-list");
+                function renderSuppliers(filteredSuppliers) {
+                    supplierList.innerHTML = "";
+                    filteredSuppliers.forEach(supplier => {
+                        const card = document.createElement("div");
+                        card.className = "supplier-card";
+                        card.innerHTML = `
+                            <h3>${supplier.name}</h3>
+                            <p>Services: ${supplier.services}</p>
+                            <p>Region: ${supplier.region}</p>
+                            <p>${supplier.details}</p>
+                        `;
+                        supplierList.appendChild(card);
+                    });
+                }
+                renderSuppliers(suppliers);
+
+                document.getElementById("search").addEventListener("input", filterSuppliers);
+                document.getElementById("services").addEventListener("change", filterSuppliers);
+                document.getElementById("region").addEventListener("change", filterSuppliers);
+
+                function filterSuppliers() {
+                    const search = document.getElementById("search").value.toLowerCase();
+                    const services = document.getElementById("services").value;
+                    const region = document.getElementById("region").value;
+                    const filtered = suppliers.filter(s => 
+                        s.name.toLowerCase().includes(search) &&
+                        (!services || s.services.includes(services)) &&
+                        (!region || s.region === region)
+                    );
+                    renderSuppliers(filtered);
+                }
+            });
+    </script>
+</body>
+</html>

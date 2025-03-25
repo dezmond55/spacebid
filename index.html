@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <title>SpaceBid - Free Space Project Procurement</title>
+    <title>SpaceBid - Your Secure Platform for Space Project Procurement</title>
     <link rel="icon" href="data:,">
     <style>
         body {
@@ -20,7 +20,6 @@
             background-color: #1a1a1a;
             color: white;
             padding: 20px;
-            text-align: center;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -29,13 +28,15 @@
             justify-content: space-between;
             align-items: center;
         }
-        .header-title {
-            margin: 0;
+        .header-title { margin: 0; }
+        .nav-container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
         }
         nav {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
             gap: 15px;
         }
         nav a {
@@ -44,9 +45,7 @@
             font-size: 1.1em;
             transition: color 0.3s ease;
         }
-        nav a:hover {
-            color: #007bff;
-        }
+        nav a:hover { color: #007bff; }
         #logout-btn {
             background-color: #007bff;
             color: white;
@@ -56,11 +55,9 @@
             cursor: pointer;
             font-size: 1em;
             transition: background-color 0.3s ease;
-            display: none; /* Hidden by default */
+            display: none;
         }
-        #logout-btn:hover {
-            background-color: #0056b3;
-        }
+        #logout-btn:hover { background-color: #0056b3; }
         .hero {
             background: url('https://images.unsplash.com/photo-1580489944062-e3b131906527?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center;
             background-size: cover;
@@ -73,15 +70,8 @@
             align-items: center;
             height: auto;
         }
-        .hero h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-        }
-        .hero p {
-            font-size: 1.2em;
-            max-width: 80%;
-            margin-bottom: 30px;
-        }
+        .hero h1 { font-size: 3em; margin-bottom: 20px; }
+        .hero p { font-size: 1.2em; max-width: 80%; margin-bottom: 30px; }
         .section {
             padding: 40px 20px;
             max-width: 90%;
@@ -102,31 +92,20 @@
             border: none;
             cursor: pointer;
         }
-        .cta:hover {
-            background-color: #0056b3;
-            transform: translateY(-2px);
-        }
-        #list form,
-        #login form,
-        #suppliers form {
+        .cta:hover { background-color: #0056b3; transform: translateY(-2px); }
+        #list form, #login form, #suppliers form {
             display: flex;
             flex-direction: column;
             gap: 12px;
             max-width: 100%;
             margin: 0 auto;
         }
-        #list label,
-        #login label,
-        #suppliers label {
+        #list label, #login label, #suppliers label {
             font-size: 1em;
             margin-bottom: 5px;
             color: #555;
         }
-        #list input,
-        #list textarea,
-        #login input,
-        #suppliers input,
-        #suppliers textarea {
+        #list input, #list textarea, #login input, #suppliers input, #suppliers textarea {
             padding: 10px;
             width: calc(100% - 20px);
             box-sizing: border-box;
@@ -135,20 +114,12 @@
             border-radius: 5px;
             transition: border-color 0.3s ease;
         }
-        #list input:focus,
-        #list textarea:focus,
-        #login input:focus,
-        #suppliers input:focus,
-        #suppliers textarea:focus {
+        #list input:focus, #list textarea:focus, #login input:focus, #suppliers input:focus, #suppliers textarea:focus {
             outline: none;
             border-color: #007bff;
             box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
         }
-        #list textarea,
-        #suppliers textarea {
-            height: 100px;
-            resize: vertical;
-        }
+        #list textarea, #suppliers textarea { height: 100px; resize: vertical; }
         footer {
             background-color: #1a1a1a;
             color: white;
@@ -165,38 +136,13 @@
             justify-content: space-between;
             gap: 20px;
         }
-        .footer-section {
-            flex: 1;
-            min-width: 200px;
-        }
-        .footer-section h3 {
-            font-size: 1.2em;
-            margin-bottom: 15px;
-            color: #fff;
-        }
-        .footer-section p, .footer-section li {
-            font-size: 0.9em;
-            margin-bottom: 10px;
-            color: #ccc;
-        }
-        .footer-section a {
-            color: #007bff;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        .footer-section a:hover {
-            color: #0056b3;
-        }
-        .footer-section ul {
-            list-style: none;
-            padding: 0;
-        }
-        .footer-bottom {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 0.9em;
-            color: #ccc;
-        }
+        .footer-section { flex: 1; min-width: 200px; }
+        .footer-section h3 { font-size: 1.2em; margin-bottom: 15px; color: #fff; }
+        .footer-section p, .footer-section li { font-size: 0.9em; margin-bottom: 10px; color: #ccc; }
+        .footer-section a { color: #007bff; text-decoration: none; transition: color 0.3s ease; }
+        .footer-section a:hover { color: #0056b3; }
+        .footer-section ul { list-style: none; padding: 0; }
+        .footer-bottom { text-align: center; margin-top: 20px; font-size: 0.9em; color: #ccc; }
         #login .toggle {
             cursor: pointer;
             color: #007bff;
@@ -206,13 +152,8 @@
             display: block;
             text-align: center;
         }
-        #login .toggle:hover {
-            color: #0056b3;
-        }
-        #list,
-        #suppliers {
-            display: none;
-        }
+        #login .toggle:hover { color: #0056b3; }
+        #list, #suppliers { display: none; }
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5em; }
             .hero p { font-size: 1.1em; max-width: 95%; }
@@ -222,6 +163,7 @@
             #list input, #list textarea, #login input, #suppliers input, #suppliers textarea { font-size: 0.9em; padding: 8px; }
             .footer-container { flex-direction: column; }
             header { flex-direction: column; gap: 10px; }
+            .nav-container { width: 100%; }
         }
         @media (max-width: 480px) {
             .hero h1 { font-size: 2em; }
@@ -234,24 +176,31 @@
 <body>
     <header>
         <h2 class="header-title">SpaceBid</h2>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#" id="list-link">List a Project</a>
-            <a href="#" id="suppliers-link">For Suppliers</a>
-            <a href="privacy.html">Privacy</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-            <a href="#login">Login</a>
-        </nav>
+        <div class="nav-container">
+            <nav>
+                <a href="#home">Home</a>
+                <a href="browse_projects.html">Browse Projects</a>
+                <a href="browse_suppliers.html">Browse Suppliers</a>
+                <a href="#" id="list-link">List a Project</a>
+                <a href="#" id="suppliers-link">For Suppliers</a>
+                <a href="blog.html">Blog</a>
+                <a href="faq.html">FAQ</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+                <a href="#login">Login</a>
+            </nav>
+        </div>
         <button id="logout-btn">Logout</button>
     </header>
+    <!-- Rest of the content remains unchanged -->
     <div class="hero" id="home">
-        <h1>Securely List Your Space Project for Free</h1>
-        <p>Connect with trusted component manufacturers—your data stays confidential.</p>
+        <h1>Discover Your Next Space Venture</h1>
+        <p>Your secure platform for space project procurement—connecting trusted space builders with component manufacturers worldwide.</p>
     </div>
     <div class="section" id="login">
         <h2 id="login-title">Login</h2>
-        <p id="login-message">Log in to access your projects or supplier dashboard.</p>
+        <p id="login-message">Log in to access your space projects or supplier dashboard.</p>
         <form id="auth-form">
             <label>Email:</label>
             <input type="email" id="email" required placeholder="e.g., you@company.com">
@@ -267,7 +216,7 @@
     </div>
     <div class="section" id="about">
         <h2>About SpaceBid</h2>
-        <p>SpaceBid connects space builders with manufacturers securely to support the $1 trillion space economy.</p>
+        <p>SpaceBid connects space builders with manufacturers securely to support the $1 trillion space economy, offering advanced search tools and a comprehensive supplier directory.</p>
     </div>
     <div class="section" id="contact">
         <h2>Contact Us</h2>
@@ -275,7 +224,7 @@
     </div>
     <div class="section" id="list">
         <h2>List Your Project</h2>
-        <p>Submit your space project sections securely. We’ll manually verify your submission and connect you with trusted suppliers.</p>
+        <p>Submit your space project sections securely. We’ll verify your submission and connect you with trusted manufacturers.</p>
         <form action="mailto:support@spacebid.space" method="post" enctype="text/plain">
             <label>Company Name:</label>
             <input type="text" name="company" required placeholder="e.g., SpaceX">
@@ -292,7 +241,7 @@
     </div>
     <div class="section" id="suppliers">
         <h2>For Suppliers</h2>
-        <p>Browse free project listings and express interest in supplying components. Submit your company details below to join as a supplier—we’ll verify your credentials and share vetted projects.</p>
+        <p>Connect with trusted space component manufacturers. Submit your details to join our directory—we’ll verify your credentials and share vetted projects.</p>
         <form action="mailto:support@spacebid.space" method="post" enctype="text/plain">
             <label>Company Name:</label>
             <input type="text" name="supplier_company" required placeholder="e.g., OrbitalTech">
@@ -339,11 +288,11 @@
             <div class="footer-section">
                 <h3>Insights</h3>
                 <ul>
-                    <li><a href="#">How to Win Space Project Contracts</a></li>
-                    <li><a href="#">Navigating Global Space Tendering</a></li>
-                    <li><a href="#">What Does a Space Project Manager Do?</a></li>
-                    <li><a href="#">Additive Manufacturing in Space</a></li>
-                    <li><a href="#">View More Insights</a></li>
+                    <li><a href="blog.html">How to Win Space Project Contracts</a></li>
+                    <li><a href="blog.html">Navigating Global Space Tendering</a></li>
+                    <li><a href="blog.html">What Does a Space Project Manager Do?</a></li>
+                    <li><a href="blog.html">Additive Manufacturing in Space</a></li>
+                    <li><a href="blog.html">View More Insights</a></li>
                 </ul>
             </div>
         </div>
@@ -372,12 +321,11 @@
 
         function toggleAuth() {
             isLogin = !isLogin;
-            console.log("Toggle to:", isLogin);
             document.getElementById("login-title").textContent = isLogin ? "Login" : "Sign Up";
             document.getElementById("submit-btn").value = isLogin ? "Login" : "Sign Up";
             document.querySelector(".toggle").textContent = isLogin ? "Sign Up" : "Login";
             document.getElementById("login-message").textContent = isLogin
-                ? "Log in to access your projects or supplier dashboard."
+                ? "Log in to access your space projects or supplier dashboard."
                 : "Sign up to start listing projects or supplying components.";
         }
 
@@ -387,29 +335,20 @@
             e.preventDefault();
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
-            console.log("Form submitted, isLogin:", isLogin);
             if (isLogin) {
                 auth.signInWithEmailAndPassword(email, password)
                     .then((userCredential) => {
-                        console.log("Login success:", userCredential.user.email);
                         alert("Logged in successfully as " + userCredential.user.email + "!");
                         window.location.href = "dashboard.html";
                     })
-                    .catch((error) => {
-                        console.error("Login error:", error.message);
-                        alert("Error: " + error.message);
-                    });
+                    .catch((error) => alert("Error: " + error.message));
             } else {
                 auth.createUserWithEmailAndPassword(email, password)
                     .then((userCredential) => {
-                        console.log("Signup success:", userCredential.user.email);
                         alert("Signed up successfully! Please log in.");
                         toggleAuth();
                     })
-                    .catch((error) => {
-                        console.error("Signup error:", error.message);
-                        alert("Error: " + error.message);
-                    });
+                    .catch((error) => alert("Error: " + error.message));
             }
         });
 
@@ -464,6 +403,14 @@
 
         document.getElementById("list-link").addEventListener("click", (e) => handleRestrictedClick(e, "List Your Project"));
         document.getElementById("suppliers-link").addEventListener("click", (e) => handleRestrictedClick(e, "For Suppliers"));
+
+        setInterval(() => {
+            const updates = localStorage.getItem("spacebid_updates") || 0;
+            if (updates < 1) {
+                localStorage.setItem("spacebid_updates", 1);
+                alert("New activity on SpaceBid: Check Browse Projects or Suppliers!");
+            }
+        }, 30000);
     </script>
 </body>
 </html>

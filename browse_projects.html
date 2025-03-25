@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpaceBid - Browse Projects</title>
+    <link rel="icon" href="data:,">
+    <style>
+        /* Reuse styles from index.html */
+        body, header, nav, .section, footer { /* Copy from index.html */ }
+        .filter-section { margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px; }
+        .filter-section input, .filter-section select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        .project-list { display: flex; flex-wrap: wrap; gap: 20px; }
+        .project-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            flex: 1 1 300px;
+            max-width: 300px;
+        }
+        /* Add media queries from index.html */
+    </style>
+</head>
+<body>
+    <header>
+        <h2 class="header-title">SpaceBid</h2>
+        <div class="nav-container">
+            <nav>
+                <a href="index.html#home">Home</a>
+                <a href="browse_projects.html">Browse Projects</a>
+                <a href="browse_suppliers.html">Browse Suppliers</a>
+                <a href="index.html#list">List a Project</a>
+                <a href="index.html#suppliers">For Suppliers</a>
+                <a href="blog.html">Blog</a>
+                <a href="faq.html">FAQ</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="index.html#about">About</a>
+                <a href="index.html#contact">Contact</a>
+                <a href="index.html#login">Login</a>
+            </nav>
+        </div>
+        <button id="logout-btn">Logout</button>
+    </header>
+    <div class="section">
+        <h1>Browse Space Projects</h1>
+        <p>Discover your next space venture with advanced search tools.</p>
+        <div class="filter-section">
+            <input type="text" id="search" placeholder="Search projects...">
+            <select id="type">
+                <option value="">All Types</option>
+                <option value="Satellite">Satellite</option>
+                <option value="Spacecraft">Spacecraft</option>
+            </select>
+            <select id="stage">
+                <option value="">All Stages</option>
+                <option value="Design">Design</option>
+                <option value="Manufacturing">Manufacturing</option>
+            </select>
+            <select id="location">
+                <option value="">All Locations</option>
+                <option value="USA">USA</option>
+                <option value="Europe">Europe</option>
+            </select>
+        </div>
+        <div class="project-list" id="project-list"></div>
+    </div>
+    <!-- Footer same as index.html -->
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script>
+        const firebaseConfig = { /* Copy from index.html */ };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        auth.onAuthStateChanged((user) => {
+            if (!user) window.location.href = "index.html";
+            document.getElementById("logout-btn").style.display = user ? "inline-block" : "none";
+        });
+
+        document.getElementById("logout-btn").addEventListener("click", (e) => {
+            e.preventDefault();
+            auth.signOut().then(() => {
+                alert("Logged out successfully!");
+                window.location.href = "index.html";
+            });
+        });
+
+        fetch("projects.json")
+            .then(response => response.json())
+            .then(projects => {
+                const projectList = document.getElementById("project-list");
+                function renderProjects(filteredProjects) {
+                    projectList.innerHTML = "";
+                    filteredProjects.forEach(project => {
+                        const card = document.createElement("div");
+                        card.className = "project-card";
+                        card.innerHTML = `
+                            <h3>${project.name}</h3>
+                            <p>Type: ${project.type}</p>
+                            <p>Stage: ${project.stage}</p>
+                            <p>Location: ${project.location}</p>
+                            <p>${project.details}</p>
+                        `;
+                        projectList.appendChild(card);
+                    });
+                }
+                renderProjects(projects);
+
+                document.getElementById("search").addEventListener("input", filterProjects);
+                document.getElementById("type").addEventListener("change", filterProjects);
+                document.getElementById("stage").addEventListener("change", filterProjects);
+                document.getElementById("location").addEventListener("change", filterProjects);
+
+                function filterProjects() {
+                    const search = document.getElementById("search").value.toLowerCase();
+                    const type = document.getElementById("type").value;
+                    const stage = document.getElementById("stage").value;
+                    const location = document.getElementById("location").value;
+                    const filtered = projects.filter(p => 
+                        p.name.toLowerCase().includes(search) &&
+                        (!type || p.type === type) &&
+                        (!stage || p.stage === stage) &&
+                        (!location || p.location === location)
+                    );
+                    renderProjects(filtered);
+                }
+            });
+    </script>
+</body>
+</html>
