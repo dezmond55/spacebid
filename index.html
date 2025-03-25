@@ -7,6 +7,7 @@
     <title>SpaceBid - Your Secure Platform for Space Project Procurement</title>
     <link rel="icon" href="data:,">
     <style>
+        /* Same as previous index.html */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -179,8 +180,8 @@
         <div class="nav-container">
             <nav>
                 <a href="#home">Home</a>
-                <a href="browse_projects.html">Browse Projects</a>
-                <a href="browse_suppliers.html">Browse Suppliers</a>
+                <a href="#" id="browse-projects-link">Browse Projects</a>
+                <a href="#" id="browse-suppliers-link">Browse Suppliers</a>
                 <a href="#" id="list-link">List a Project</a>
                 <a href="#" id="suppliers-link">For Suppliers</a>
                 <a href="blog.html">Blog</a>
@@ -193,7 +194,6 @@
         </div>
         <button id="logout-btn">Logout</button>
     </header>
-    <!-- Rest of the content remains unchanged -->
     <div class="hero" id="home">
         <h1>Discover Your Next Space Venture</h1>
         <p>Your secure platform for space project procurement—connecting trusted space builders with component manufacturers worldwide.</p>
@@ -393,7 +393,9 @@
             event.preventDefault();
             auth.onAuthStateChanged((user) => {
                 if (user) {
-                    window.location.href = "dashboard.html";
+                    if (sectionId === "Browse Projects") window.location.href = "browse_projects.html";
+                    else if (sectionId === "Browse Suppliers") window.location.href = "browse_suppliers.html";
+                    else window.location.href = "dashboard.html";
                 } else {
                     alert("Please sign up or log in to access " + sectionId + "!");
                     document.getElementById("login").scrollIntoView();
@@ -401,6 +403,8 @@
             });
         }
 
+        document.getElementById("browse-projects-link").addEventListener("click", (e) => handleRestrictedClick(e, "Browse Projects"));
+        document.getElementById("browse-suppliers-link").addEventListener("click", (e) => handleRestrictedClick(e, "Browse Suppliers"));
         document.getElementById("list-link").addEventListener("click", (e) => handleRestrictedClick(e, "List Your Project"));
         document.getElementById("suppliers-link").addEventListener("click", (e) => handleRestrictedClick(e, "For Suppliers"));
 

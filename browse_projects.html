@@ -6,8 +6,8 @@
     <title>SpaceBid - Browse Projects</title>
     <link rel="icon" href="data:,">
     <style>
-        /* Reuse styles from index.html */
-        body, header, nav, .section, footer { /* Copy from index.html */ }
+        /* Same as previous browse_projects.html */
+        body, header, .nav-container, nav, .section, footer { /* Copy from index.html */ }
         .filter-section { margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px; }
         .filter-section input, .filter-section select {
             padding: 10px;
@@ -24,7 +24,8 @@
             flex: 1 1 300px;
             max-width: 300px;
         }
-        /* Add media queries from index.html */
+        @media (max-width: 768px) { /* Copy from index.html */ }
+        @media (max-width: 480px) { /* Copy from index.html */ }
     </style>
 </head>
 <body>
@@ -33,8 +34,8 @@
         <div class="nav-container">
             <nav>
                 <a href="index.html#home">Home</a>
-                <a href="browse_projects.html">Browse Projects</a>
-                <a href="browse_suppliers.html">Browse Suppliers</a>
+                <a href="#" id="browse-projects-link">Browse Projects</a>
+                <a href="#" id="browse-suppliers-link">Browse Suppliers</a>
                 <a href="index.html#list">List a Project</a>
                 <a href="index.html#suppliers">For Suppliers</a>
                 <a href="blog.html">Blog</a>
@@ -75,7 +76,15 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
     <script>
-        const firebaseConfig = { /* Copy from index.html */ };
+        const firebaseConfig = {
+            apiKey: "AIzaSyBKU5yiEjgbKO7Wy_K2dGj7GhM_SoAl2po",
+            authDomain: "spacebid-32f99.firebaseapp.com",
+            projectId: "spacebid-32f99",
+            storageBucket: "spacebid-32f99.firebasestorage.app",
+            messagingSenderId: "210214583211",
+            appId: "1:210214583211:web:70ae2ddbf5b8b1c96f70ee",
+            measurementId: "G-L25FXHN0ZC"
+        };
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
 
