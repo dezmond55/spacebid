@@ -241,14 +241,13 @@
             <a href="privacy.html">Privacy</a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
-            <a href="#login" id="login-link">Login</a>
+            <a href="#login">Login</a>
         </nav>
         <button id="logout-btn">Logout</button>
     </header>
     <div class="hero" id="home">
         <h1>Securely List Your Space Project for Free</h1>
         <p>Connect with trusted component manufacturers—your data stays confidential.</p>
-        <!-- Removed Get Started button -->
     </div>
     <div class="section" id="login">
         <h2 id="login-title">Login</h2>
@@ -417,17 +416,26 @@
         auth.onAuthStateChanged((user) => {
             const listSection = document.getElementById("list");
             const suppliersSection = document.getElementById("suppliers");
-            const loginLink = document.getElementById("login-link");
+            const loginSection = document.getElementById("login");
+            const privacySection = document.getElementById("privacy");
+            const aboutSection = document.getElementById("about");
+            const contactSection = document.getElementById("contact");
             const logoutBtn = document.getElementById("logout-btn");
             if (user) {
                 listSection.style.display = "block";
                 suppliersSection.style.display = "block";
-                loginLink.style.display = "none";
+                loginSection.style.display = "none";
+                privacySection.style.display = "none";
+                aboutSection.style.display = "none";
+                contactSection.style.display = "none";
                 logoutBtn.style.display = "inline-block";
             } else {
                 listSection.style.display = "none";
                 suppliersSection.style.display = "none";
-                loginLink.style.display = "inline";
+                loginSection.style.display = "block";
+                privacySection.style.display = "block";
+                aboutSection.style.display = "block";
+                contactSection.style.display = "block";
                 logoutBtn.style.display = "none";
             }
         });
